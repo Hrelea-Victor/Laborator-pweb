@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/style">
+	<meta charset="UTF-8">
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+	<meta name="description" content="Prezentare personala">
+</head>
+<body>
+	<header id="home">
+		<h1>Hrelea Victor</h1>
+		<p>IESC, UNITBV</p>
+	</header>
+	<nav>
+		<a href="#home">Acasa</a>
+		<a href="#about">Despre mine</a>
+		<a href="#education">Educatie</a>
+		<a href="#contact">Contact</a>
+	</nav>
+	<main>
+		<section>
+			<h2 id="about">Despre mine</h2>
+			<img src="images/black.png" alt="Poza Profil" width="50" height="50" loading="lazy">
+			<p>Text test</p>
+		</section>
+		<section>
+			<h2 id="education">Educatie</h2>
+			<ol>
+				<li>Matei Basarab</li>
+				<li>Constantin Carabella</li>
+				<li>UNITBV</li>
+			</ol>
+		</section>
+	</main>
+	<aside>
+		<h3>Hobby</h3>
+		<p>Tehnologie</p>
+		<h3>Citat preferat</h3>
+		<p>Test</p>
+	</aside>
+	<footer>
+		<script src="js/contact_form.js"></script>
+		<p>Copyright</p>
+		<p>Contact</p>
+		<form id="contact">
+			<label for="name">Nume</label><br>
+			<input type="text" id="name" name="name" required><br>
+			<label for="email">Email</label><br>
+			<input type="email" id="email" name="email" required><br>
+			<label for="message">Mesaj</label><br>
+			<textarea id="message" name="message" rows="4" required></textarea><br>
+			<button type ="submit" onclick="submitForm()">Submit!</button>
+		</form>
+	</footer>
+</body>
+<script>
+	alert("Hello World!");
+</script
+</html>

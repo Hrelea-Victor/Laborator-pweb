@@ -1,0 +1,19 @@
+h1 {
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+  background-color: #ED8242;
+  box-sizing: content-box;
+  text-align: center;
+  margin: auto
+}
+
+p {
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+body {
+  background-color: #D9CAC1;
+}
