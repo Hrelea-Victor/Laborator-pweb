@@ -19,7 +19,7 @@
 	</nav>
 	<main>
 		<section>
-			<h2 id="about">Despre mine</h2>
+			<h2 id="about">Text schimbat</h2>
 			<img src="images/black.png" alt="Poza Profil" width="50" height="50" loading="lazy">
 			<p>Text test</p>
 		</section>
@@ -39,7 +39,6 @@
 		<p>Test</p>
 	</aside>
 	<footer>
-		<script src="js/contact_form.js"></script>
 		<p>Copyright</p>
 		<p>Contact</p>
 		<form id="contact">
@@ -52,6 +51,7 @@
 			<button type ="submit" onclick="submitForm()">Submit!</button>
 		</form>
 	</footer>
+	<script src="js/contact_form.js"></script>
 </body>
 <script>
 	alert("Hello World!");
