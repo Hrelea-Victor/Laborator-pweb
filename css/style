@@ -8,12 +8,22 @@ h1 {
   margin: auto
 }
 
+
 p {
   border-radius: 25px;
   border: 2px solid black;
   padding: 20px;
 }
 
-body {
+
+
+
+body.light-mode {
   background-color: #D9CAC1;
+  color: #000000;
+}
+
+body.dark-mode {
+  background-color: #404040;
+  color: #FFFFFF;
 }

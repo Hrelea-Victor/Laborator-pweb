@@ -12,10 +12,13 @@
 		<p>IESC, UNITBV</p>
 	</header>
 	<nav>
-		<a href="#home">Acasa</a>
-		<a href="#about">Despre mine</a>
-		<a href="#education">Educatie</a>
-		<a href="#contact">Contact</a>
+		<ul>
+			<li><a href="#home">Acasa</a></li>
+			<li><a href="#about">Despre mine</a></li>
+			<li><a href="#education">Educatie</a></li>
+			<li><a href="#contact">Contact</a></li>
+			<li><h5 id="Dark">Dark Mode</h5></li>
+		</ul>
 	</nav>
 	<main>
 		<section>
@@ -41,14 +44,15 @@
 	<footer>
 		<p>Copyright</p>
 		<p>Contact</p>
-		<form id="contact">
+		<form id="contact" onsubmit="submitForm();return false">
 			<label for="name">Nume</label><br>
 			<input type="text" id="name" name="name" required><br>
 			<label for="email">Email</label><br>
 			<input type="email" id="email" name="email" required><br>
 			<label for="message">Mesaj</label><br>
 			<textarea id="message" name="message" rows="4" required></textarea><br>
-			<button type ="submit" onclick="submitForm()">Submit!</button>
+			<button type ="submit">Submit!</button>
+			<p id="feedback"></p>
 		</form>
 	</footer>
 	<script src="js/contact_form.js"></script>
