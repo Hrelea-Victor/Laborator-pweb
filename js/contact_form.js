@@ -35,7 +35,7 @@ const ora=new Date().getHours();
 const body = document.body;
 const text=document.querySelector("header p");
 body.classList.add('light-mode');
-
+const hide = document.querySelectorAll("main h2");
 
 if (ora >= 6 && ora <= 11)
 {
@@ -48,6 +48,7 @@ else if (ora >= 12 && ora <= 17)
 else {
 	text.textContent ="Buna seara! Bine ai venit pe pagina mea.";
 }
+
 dark.addEventListener('click',function(event){
 	if (body.classList.contains('light-mode')){
 		body.classList.replace('light-mode', 'dark-mode');
@@ -57,4 +58,15 @@ dark.addEventListener('click',function(event){
 		dark.textContent = 'Dark Mode'
 	}
 
+});
+
+hide.forEach(function (h2) {
+  h2.addEventListener('click', function () {
+    let el = this.nextElementSibling;
+    while (el && el.tagName !== 'H2') {
+      el.classList.toggle('hidden');
+      el = el.nextElementSibling;
+    }
+
+  });
 });

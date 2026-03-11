@@ -22,17 +22,17 @@
 	</nav>
 	<main>
 		<section>
-			<h2 id="about">Text schimbat</h2>
+			<h2 id="about">Despre mine</h2>
 			<img src="images/black.png" alt="Poza Profil" width="50" height="50" loading="lazy">
 			<p>Text test</p>
 		</section>
 		<section>
 			<h2 id="education">Educatie</h2>
-			<ol>
-				<li>Matei Basarab</li>
-				<li>Constantin Carabella</li>
-				<li>UNITBV</li>
-			</ol>
+				<ol id = "education_list">
+					<li>Matei Basarab 2010-2018 </li>
+					<li>Constantin Carabella 2018 - 2022 </li>
+					<li>UNITBV 2024 - 2026 </li>
+				</ol>
 		</section>
 	</main>
 	<aside>
@@ -56,6 +56,7 @@
 		</form>
 	</footer>
 	<script src="js/contact_form.js"></script>
+	<script src="js/array.js"></script>
 </body>
 <script>
 	alert("Hello World!");

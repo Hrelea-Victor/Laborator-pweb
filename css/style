@@ -27,3 +27,7 @@ body.dark-mode {
   background-color: #404040;
   color: #FFFFFF;
 }
+
+.hidden {
+  display: none;
+}
