@@ -1,6 +1,8 @@
 import Card from './Card';
 import {useState} from 'react';
 import QuickNote from './QuickNote';
+import TodoList from './TodoList';
+import ContactForm from './ContactForm';
 
 const projects = [
 	{title: "Proiect 1", description: "Pagina cu HTML si CSS"},
@@ -24,6 +26,8 @@ return (
 		<button onClick={() => setCount(count - 1)}>Click -</button>
 		<button onClick={() => setCount(0)}>Reset</button>
 		<QuickNote/>
+		<TodoList/>
+		<ContactForm/>
 	</div>
 	);
 }
