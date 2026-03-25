@@ -3,6 +3,7 @@ import {useState} from 'react';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
+import ProjectList from './ProjectList';
 
 const projects = [
 	{title: "Proiect 1", description: "Pagina cu HTML si CSS"},
@@ -18,9 +19,7 @@ return (
 		<h1>Dashboard</h1>
 		<p>Numele vostru </p>
 		<h2>H2 de test</h2>
-		{projects.map(function(item, index) {
-			return <Card key = {index} title = {item.title} description = {item.description}/>;
-		})}
+		<ProjectList/>
 		<p>Ai apasat de {count} ori</p>
 		<button onClick={() => setCount(count + 1)}>Click +</button>
 		<button onClick={() => setCount(count - 1)}>Click -</button>
