@@ -33,6 +33,11 @@ return (
 return p.title.toLowerCase().includes(filter.toLowerCase()); }).map(function(item, index) {
 return <Card key={item.id} title={item.title} description={item.tech} done={item.done}/>;
 })}
+<div>
+<p>Proiecte totale: {projects.length}</p>
+<p>Proiecte finalizate: {projects.filter(p => p.done).length}</p>
+<p>Proiecte in lucru: {projects.filter(p => !p.done).length}</p>
+</div>
 </div>
 );
 }
