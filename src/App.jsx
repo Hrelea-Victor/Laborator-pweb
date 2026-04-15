@@ -1,33 +1,16 @@
-import Card from './Card';
-import {useState} from 'react';
-import QuickNote from './QuickNote';
-import TodoList from './TodoList';
-import ContactForm from './ContactForm';
-import ProjectList from './ProjectList';
-
-const projects = [
-	{title: "Proiect 1", description: "Pagina cu HTML si CSS"},
-	{title: "Proiect 2", description: "Pagina cu JS"},
-	{title: "Proiect 3", description: "Dashboard cu React"},
-	{title: "Proiect 4", description: "Test1"},
-	{title: "Proiect 5", description: "Test2"}
-];
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
 function App() {
-	const [count, setCount] = useState(0);
-return (
-	<div>
-		<h1>Dashboard</h1>
-		<p>Numele vostru </p>
-		<h2>H2 de test</h2>
-		<ProjectList/>
-		<p>Ai apasat de {count} ori</p>
-		<button onClick={() => setCount(count + 1)}>Click +</button>
-		<button onClick={() => setCount(count - 1)}>Click -</button>
-		<button onClick={() => setCount(0)}>Reset</button>
-		<QuickNote/>
-		<TodoList/>
-		<ContactForm/>
-	</div>
+	return (
+		<BrowserRouter>
+		<Routes>
+		<Route path="/" element={<Home />} />
+		<Route path="/projects" element={<Projects />} />
+		<Route path="/contact" element={<Contact />} />
+		</Routes>
+		</BrowserRouter>
 	);
 }
 export default App;
