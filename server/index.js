@@ -33,6 +33,7 @@ app.get('/api/stats', function(req, res) {
 	};
 	res.json(result);
 });
+
 // POST /api/projects - adauga un proiect nou
 app.post('/api/projects', function(req, res) {
 	 const newProject = {
@@ -44,6 +45,18 @@ app.post('/api/projects', function(req, res) {
 	console.log(newProject); 
 	projects.push(newProject);
 	res.status(201).json(newProject);
+});
+
+//delete
+app.delete('/api/projects/:id', function(req, res) {
+	const del_id = parseInt(req.params.id);
+	const index = projects.findIndex(p => p.id === del_id);
+	if (index === -1)
+		res.status(404).json({error: 'Not found' });
+	else{
+		projects.splice(index, 1);
+		res.json({message: 'Deleted'});
+	}		
 });
 
 // Porneste serverul
