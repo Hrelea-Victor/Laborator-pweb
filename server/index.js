@@ -15,23 +15,26 @@ app.get('/', function(req, res) {
 	res.json({ message: 'Serverul functioneaza!' });
 });
 // Date (temporar in memorie, vom folosi MongoDB mai tarziu)
-const projects = [
-	{ id: 1, title: "Pagina Personala", tech: "HTML, CSS", done: true },
-	{ id: 2, title: "Calculator Buget", tech: "JS", done: true },
-	{ id: 3, title: "Dashboard React", tech: "React", done: false },
-	{ id: 4, title: "API Meteo", tech: "React, API", done: false },
-];
+const Project = require('./models/Project');
+
 // GET /api/projects - returneaza toate proiectele
-app.get('/api/projects', function(req, res) {
-	res.json(projects);
+app.get('/api/projects', async function(req, res) {
+	try {
+		const projects = await Project.find();
+		res.json(projects);
+	} catch (err) {
+		res.status(500).json({ error : 'Eroare ' + err });
+	}
+	
 });
-// GET pt proiecte individuale
+/* GET pt proiecte individuale
 app.get('/api/projects/:id', function(req, res) {
 	if(projects.find(p => p.id === parseInt(req.params.id)))
 		res.json(projects.find(p => p.id === parseInt(req.params.id)));
 	else
 		res.status(404).json({error: 'Not found' });
 });
+
 
 app.get('/api/stats', function(req, res) {
 	const result = {
@@ -41,7 +44,7 @@ app.get('/api/stats', function(req, res) {
 	};
 	res.json(result);
 });
-
+*/
 // POST /api/projects - adauga un proiect nou
 app.post('/api/projects', function(req, res) {
 	 const newProject = {
