@@ -5,6 +5,8 @@ const [projects, setProjects] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [filter, setFilter] = useState('');
+const [title, setTitle] = useState('');
+const [tech, setTech] = useState('');
 useEffect(function() {
 fetch('http://localhost:3000/api/projects')
 .then(function(response) {
@@ -25,6 +27,21 @@ return <p>Se incarca...</p>;
 if (error != null) {
 	return <p>{error}</p>
 }
+async function handleSubmit() {
+try {
+const response = await fetch('http://localhost:3000/api/projects', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ title: title, tech: tech }),
+});
+const newProject = await response.json();
+setProjects([...projects, newProject]);
+setTitle(''); // Goleste input-urile
+setTech('');
+} catch (err) {
+console.error('Eroare:', err);
+}
+}
 return (
 <div>
 <h3>Proiecte</h3>
@@ -37,6 +54,22 @@ return <Card key={item.id} title={item.title} description={item.tech} done={item
 <p>Proiecte totale: {projects.length}</p>
 <p>Proiecte finalizate: {projects.filter(p => p.done).length}</p>
 <p>Proiecte in lucru: {projects.filter(p => !p.done).length}</p>
+</div>
+<div>
+<h3>Add a project</h3>
+<input 
+	value={title}
+	onChange={(e) => setTitle(e.target.value)}
+	placeholder="Title"
+/>
+<input 
+	value={tech}
+	onChange={(e) => setTech(e.target.value)}
+	placeholder="Tech"
+/>
+<button onClick = {handleSubmit}>Add</button>
+
+
 </div>
 </div>
 );
