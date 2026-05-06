@@ -6,12 +6,12 @@ const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [filter, setFilter] = useState('');
 useEffect(function() {
-fetch('/data/projects.json')
+fetch('http://localhost:3000/api/projects')
 .then(function(response) {
 return response.json();
 })
 .then(function(data) {
-setProjects(data.projects);
+setProjects(data);
 setLoading(false);
 })
 .catch(function(err) {
