@@ -27,15 +27,18 @@ app.get('/api/projects', async function(req, res) {
 	}
 	
 });
-/* GET pt proiecte individuale
-app.get('/api/projects/:id', function(req, res) {
-	if(projects.find(p => p.id === parseInt(req.params.id)))
-		res.json(projects.find(p => p.id === parseInt(req.params.id)));
-	else
-		res.status(404).json({error: 'Not found' });
+ //GET pt proiecte individuale
+app.get('/api/projects/:id', async function(req, res) {
+	try {
+		const projectid = await Project.findById(req.params.id);
+		res.json(projectid);
+	} catch (err) {
+		res.status(404).json({ error : 'Eroare ' + err });
+	}
+	
 });
 
-
+/*
 app.get('/api/stats', function(req, res) {
 	const result = {
 		"total": projects.length,
@@ -45,6 +48,7 @@ app.get('/api/stats', function(req, res) {
 	res.json(result);
 });
 */
+
 // POST /api/projects - adauga un proiect nou
 app.post('/api/projects', async function(req, res) {
 	try { 
@@ -61,15 +65,14 @@ app.post('/api/projects', async function(req, res) {
 });
 
 //delete
-app.delete('/api/projects/:id', function(req, res) {
-	const del_id = parseInt(req.params.id);
-	const index = projects.findIndex(p => p.id === del_id);
-	if (index === -1)
-		res.status(404).json({error: 'Not found' });
-	else{
-		projects.splice(index, 1);
-		res.json({message: 'Deleted'});
-	}		
+app.delete('/api/projects/:id', async function(req, res) {
+	try {
+		const projectid = await Project.findByIdAndDelete(req.params.id);
+		res.json({ message: 'Deleted'});
+	} catch (err) {
+		res.status(404).json({ error : 'Eroare ' + err });
+	}
+	
 });
 
 // Porneste serverul
