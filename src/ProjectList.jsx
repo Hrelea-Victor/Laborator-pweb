@@ -74,7 +74,7 @@ function ProjectList() {
 			const response = await fetch('http://localhost:3000/api/projects/' + id, {
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ title: title, tech: tech }),
+				body: JSON.stringify({ title: editTitle, tech: editTech }),
 			});
 			const updatedProject = await response.json();
 			setProjects(projects.map(p => p._id === id ? updatedProject : p));
