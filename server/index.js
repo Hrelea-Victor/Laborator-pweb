@@ -4,40 +4,40 @@ const cors = require('cors');
 app.use(cors())
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dashboard')
-.then(function() {
-console.log('Conectat la MongoDB!');
-})
-.catch(function(err) {
-console.error('Eroare conectare MongoDB:', err);
-});
+	.then(function () {
+		console.log('Conectat la MongoDB!');
+	})
+	.catch(function (err) {
+		console.error('Eroare conectare MongoDB:', err);
+	});
 const PORT = 3000;
 // Prima ruta: raspunde la GET /
 app.use(express.json());
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
 	res.json({ message: 'Serverul functioneaza!' });
 });
 // Date (temporar in memorie, vom folosi MongoDB mai tarziu)
 const Project = require('./models/Project');
 
 // GET /api/projects - returneaza toate proiectele
-app.get('/api/projects', async function(req, res) {
+app.get('/api/projects', async function (req, res) {
 	try {
 		const projects = await Project.find();
 		res.json(projects);
 	} catch (err) {
-		res.status(500).json({ error : 'Eroare ' + err });
+		res.status(500).json({ error: 'Eroare ' + err });
 	}
-	
+
 });
- //GET pt proiecte individuale
-app.get('/api/projects/:id', async function(req, res) {
+//GET pt proiecte individuale
+app.get('/api/projects/:id', async function (req, res) {
 	try {
 		const projectid = await Project.findById(req.params.id);
 		res.json(projectid);
 	} catch (err) {
-		res.status(404).json({ error : 'Eroare ' + err });
+		res.status(404).json({ error: 'Eroare ' + err });
 	}
-	
+
 });
 
 /*
@@ -52,8 +52,8 @@ app.get('/api/stats', function(req, res) {
 */
 
 // POST /api/projects - adauga un proiect nou
-app.post('/api/projects', async function(req, res) {
-	try { 
+app.post('/api/projects', async function (req, res) {
+	try {
 		const newProject = new Project({
 			title: req.body.title,
 			tech: req.body.tech,
@@ -62,22 +62,36 @@ app.post('/api/projects', async function(req, res) {
 		const saved = await newProject.save();
 		res.status(201).json(saved);
 	} catch (err) {
-		res.status(400).json({ error: err.message});
+		res.status(400).json({ error: err.message });
+	}
+});
+
+app.put('/api/projects/:id', async function (req, res) {
+	try {
+		const updated = await Project.findByIdAndUpdate(
+			req.params.id,
+			req.body,
+			{ new: true } // returneaza documentul DUPA actualizare
+		);
+		if (!updated) return res.status(404).json({ error: 'Not found' });
+		res.json(updated);
+	} catch (err) {
+		res.status(400).json({ error: err.message });
 	}
 });
 
 //delete
-app.delete('/api/projects/:id', async function(req, res) {
+app.delete('/api/projects/:id', async function (req, res) {
 	try {
 		const projectid = await Project.findByIdAndDelete(req.params.id);
-		res.json({ message: 'Deleted'});
+		res.json({ message: 'Deleted' });
 	} catch (err) {
-		res.status(404).json({ error : 'Eroare ' + err });
+		res.status(404).json({ error: 'Eroare ' + err });
 	}
-	
+
 });
 
 // Porneste serverul
-app.listen(PORT, function() {
+app.listen(PORT, function () {
 	console.log('Server pornit pe http://localhost:' + PORT);
 });
