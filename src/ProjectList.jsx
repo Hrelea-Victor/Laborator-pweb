@@ -7,6 +7,10 @@ function ProjectList() {
 	const [filter, setFilter] = useState('');
 	const [title, setTitle] = useState('');
 	const [tech, setTech] = useState('');
+	const [editingId, setEditingId] = useState(null);
+	const [editTitle, setEditTitle] = useState('');
+	const [editTech, setEditTech] = useState('');
+
 	useEffect(function () {
 		fetch('http://localhost:3000/api/projects')
 			.then(function (response) {
@@ -52,7 +56,7 @@ function ProjectList() {
 			console.error('Eroare:', err);
 		}
 	}
-	async function handleToggle(id, currentDone){
+	async function handleToggle(id, currentDone) {
 		try{
 			const response = await fetch('http://localhost:3000/api/projects/' + id, {
 				method: 'PUT',
@@ -65,6 +69,20 @@ function ProjectList() {
 			console.error('Eroare:', err);
 		}
 	}
+	async function handleEdit(id) {
+		try{
+			const response = await fetch('http://localhost:3000/api/projects/' + id, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ title: title, tech: tech }),
+			});
+			const updatedProject = await response.json();
+			setProjects(projects.map(p => p._id === id ? updatedProject : p));
+			setEditingId(null);
+		} catch(err) {
+			console.error('Eroare:', err);
+		}
+	}
 	return (
 		<div>
 			<h3>Proiecte</h3>
@@ -74,10 +92,28 @@ function ProjectList() {
 					return p.title.toLowerCase().includes(filter.toLowerCase());
 				}).map(function (item, index) {
 					return (
-						<li key={item.id}>
-							<Card title={item.title} description={item.tech} done={item.done} />
-							<button onClick={() => handleDelete(item._id)}>Delete</button>
-							<button onClick={() => handleToggle(item._id, item.done)}>Toggle Done</button>
+						<li key={item._id}>
+							{editingId !== item._id ? (
+								<div>
+									<Card title={item.title} description={item.tech} done={item.done} />
+									<button onClick={() => handleDelete(item._id)}>Delete</button>
+									<button onClick={() => handleToggle(item._id, item.done)}>Toggle Done</button>
+									<button onClick={() => setEditingId(item._id)}>Edit</button>
+								</div>
+							) : (
+								<div>
+									<input value = {editTitle}
+										onChange={(e) => setEditTitle(e.target.value)}
+										placeholder="Title"
+									/>
+									<input value = {editTech}
+										onChange={(e) => setEditTech(e.target.value)}
+										placeholder="Tech"
+									/>
+									<button onClick={() => handleEdit(item._id)}>Save</button>
+									<button onClick={() => setEditingId(null)}>Cancel</button> 
+								</div>
+							)}
 						</li>
 					);
 				})}
