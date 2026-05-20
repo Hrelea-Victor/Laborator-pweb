@@ -40,16 +40,17 @@ app.get('/api/projects/:id', async function (req, res) {
 
 });
 
-/*
-app.get('/api/stats', function(req, res) {
-	const result = {
-		"total": projects.length,
-		"done": projects.filter(p => p.done).length,
-		"in work" : projects.filter(p => !p.done).length,
-	};
-	res.json(result);
+app.get('/api/stats', async function(req, res) {
+	try{ 
+		const total = await Project.countDocuments();
+		const done = await Project.countDocuments({done: true});
+		res.json({ total: total, done: done, inProgress: total - done});
+	} catch (err) {
+		res.status(500).json({ error: 'Eroare server: ' + err});
+	}
+
+
 });
-*/
 
 // POST /api/projects - adauga un proiect nou
 app.post('/api/projects', async function (req, res) {
