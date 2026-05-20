@@ -48,10 +48,12 @@ function ProjectList() {
 	}
 	async function handleDelete(id) {
 		try {
-			const response = await fetch('http://localhost:3000/api/projects/' + id, {
-				method: 'DELETE',
-			});
-			setProjects(projects.filter(p => p._id !== id))
+			if(window.confirm('Sigur doriti sa stergeti acest proiect?')) {
+				const response = await fetch('http://localhost:3000/api/projects/' + id, {
+					method: 'DELETE',
+				});
+				setProjects(projects.filter(p => p._id !== id))
+			}
 		} catch (err) {
 			console.error('Eroare:', err);
 		}
